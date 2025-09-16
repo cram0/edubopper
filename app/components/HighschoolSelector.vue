@@ -10,10 +10,17 @@ const {
 // Open search bar
 const isExpanded = ref(false)
 
-// Selected highschool state
-const selectedHighschool = ref<string | null>(null)
-const displayedHighschool = computed(
-	() => selectedHighschool.value || 'Lycée Gaston Berger'
+const props = defineProps<{
+	modelValue?: Highschool | null
+}>()
+
+const emit = defineEmits<{
+	(e: 'submit', value: Highschool): void
+}>()
+
+const localSelectedName = ref<string | null>(null)
+const displayedHighschool = computed(() =>
+	props.modelValue?.name || localSelectedName.value || 'Error'
 )
 
 // Debouncing
@@ -42,14 +49,13 @@ const filtered = computed<Highschool[]>(() => {
 })
 
 const selectHighschool = (hs: Highschool) => {
-	selectedHighschool.value = hs.name
+	// Update parent model and keep a local fallback name
+	localSelectedName.value = hs.name
 	emit('submit', hs)
 	isExpanded.value = false
 	searchQuery.value = ''
 	debouncedQuery.value = ''
 }
-
-const emit = defineEmits<(e: 'submit', value: Highschool) => void>()
 
 watch(searchQuery, (val) => {
 	if (debounceHandle) clearTimeout(debounceHandle)
@@ -76,13 +82,13 @@ onUnmounted(() => {
 						src="@/assets/icons/search.svg"
 						class="absolute left-4 size-4 text-white"
 						aria-hidden="true"
-					/>
+					>
 					<input
 						v-model="searchQuery"
 						class="text-gris-900 w-full bg-beige p-4 pl-10 rounded-full"
 						placeholder="Rechercher un lycée"
 						autocomplete="off"
-					/>
+					>
 				</div>
 				<div
 					class="mt-3 bg-beige rounded-3xl max-h-[50vh] overflow-y-auto shadow-lg"
@@ -130,11 +136,11 @@ onUnmounted(() => {
 					</span>
 					<div class="flex flex-row gap-2">
 						<div class="flex flex-row gap-1 items-center-safe">
-							<img src="@/assets/icons/map-pin.svg" class="size-3" />
+							<img src="@/assets/icons/map-pin.svg" class="size-3">
 							<span class="text-sm">Lille</span>
 						</div>
 						<div class="flex flex-row gap-1 items-center-safe">
-							<img src="@/assets/icons/building.svg" class="size-3" />
+							<img src="@/assets/icons/building.svg" class="size-3">
 							<span class="text-sm">Lycée Public</span>
 						</div>
 					</div>

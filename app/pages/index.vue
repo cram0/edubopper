@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { Highschool } from '@@/types/highschool.ts'
 
+const route = useRoute()
+
 const bacOptions = ref<{
 	classes: string[]
 	baccalaureatTypes: { label: string; specialities: string[] }[]
@@ -8,7 +10,9 @@ const bacOptions = ref<{
 }>({
 	classes: ['Seconde', 'Première', 'Terminale'],
 
-	baccalaureatTypes: [],
+	baccalaureatTypes: [
+
+	],
 
 	rankingChoices: [
 		{ label: '1er de la classe', value: 'first' },
@@ -17,9 +21,9 @@ const bacOptions = ref<{
 	],
 })
 
-const getAllBaccalaureatNames = () => {
-	return bacOptions.value.baccalaureatTypes.map((type) => type.label)
-}
+const allBaccalaureatNames = computed(() =>
+	bacOptions.value.baccalaureatTypes.map((type) => type.label)
+)
 
 const getAllClasses = () => {
 	return bacOptions.value.classes
@@ -123,19 +127,38 @@ const handleGetHighschoolInformations = async (hs: Highschool) => {
 		selectedBacType.value = null
 	}
 }
+
+// If random query parameter is set to true, prefill baccalaureat types with random values
+if (route.query.random === "true") {
+	console.log("Random mode: Prefilling baccalaureat types.", route.query);
+	const response = await useFetch('/api/highschool/random', { method: 'get' });
+	const data = response.data.value?.data;
+	if (data) {
+		console.log("Fetched random highschool data:", data);
+		const highschoolData = data as { highschool: Highschool; bacTypes: { label: string; specialities: string[] }[] };
+		selectedHighschool.value = highschoolData.highschool;
+		bacOptions.value = {
+			...bacOptions.value,
+			baccalaureatTypes: highschoolData.bacTypes,
+		}
+	} else {
+		console.warn("Failed to fetch random highschool data.");
+
+	}
+}
 </script>
 
 <template>
 	<div class="flex flex-col gap-4 flex-1">
 		<div class="flex flex-col gap-4">
-			<HighschoolSelector @submit="handleGetHighschoolInformations" />
+			<HighschoolSelector v-model="selectedHighschool" @submit="handleGetHighschoolInformations" />
 			<ChoiceSelector
 				:key="classSelectorKey"
 				title="Classe"
 				:error-message="!isClassComplete ? 'À completer' : undefined"
 				:options="[
 					getAllClasses(),
-					{ title: 'Type de bac', options: getAllBaccalaureatNames() },
+					{ title: 'Type de bac', options: allBaccalaureatNames },
 				]"
 				@submit="handleClassSelections"
 			/>

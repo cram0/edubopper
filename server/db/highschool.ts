@@ -35,6 +35,11 @@ const getHighschoolById: (id: number) => Highschool | null = (id: number) => {
 	return names[id - 1] ? { id, name: names[id - 1] } : null
 }
 
+const getRandomHighschool = (): Highschool => {
+	const id = Math.floor(Math.random() * names.length) + 1
+	return { id, name: names[id - 1] }
+}
+
 const getBacTypes: (
 	highschoolId: number
 ) => { label: string; specialities: string[] }[] = (highschoolId: number) => {
@@ -49,4 +54,9 @@ const getBacTypes: (
 	return types
 }
 
-export { getAllHighschools, getHighschoolById, getBacTypes }
+export {
+	getAllHighschools,
+	getHighschoolById,
+	getBacTypes,
+	getRandomHighschool,
+}
