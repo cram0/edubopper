@@ -1,6 +1,15 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
 	--color-beige: #f7f3f0;
 	--color-beige-border: #eee8e4;
+	--color-gris: #757575;
+	--color-gris-100: #f5f5f5;
+	--color-gris-200: #e0e0e0;
+	--color-gris-900: #212121;
+	--font-primary: 'DM Sans', sans-serif;
+}
+
+body {
+	font-family: 'DM Sans', sans-serif;
 }
