@@ -45,13 +45,6 @@ const buttonClasses = computed(() => {
 
 	const widthClasses = props.fullWidth ? 'w-full' : ''
 
-	console.log('buttonClasses :', {
-		baseClasses,
-		variantClasses: variantClasses[props.variant],
-		sizeClasses: sizeClasses[props.size],
-		widthClasses,
-	})
-
 	return [
 		baseClasses,
 		variantClasses[props.variant],
