@@ -73,10 +73,10 @@ onUnmounted(() => {
 	<div>
 		<div
 			v-if="isExpanded"
-			class="z-[9999] inset-0 bg-black/70 fixed pt-10"
+			class="z-[9999] inset-0 bg-black/70 fixed pt-10 px-8 sm:px-4"
 			@click.self="isExpanded = false"
 		>
-			<div class="mx-auto w-3/4 max-w-3xl flex flex-col">
+			<div class="mx-auto w-full sm:w-3/4 max-w-3xl flex flex-col">
 				<div class="relative flex items-center">
 					<img
 						src="@/assets/icons/search.svg"
