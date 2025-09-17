@@ -41,6 +41,6 @@
 		</div>
 
 		<!-- Button -->
-		 <EDButton variant="primary" size="lg">Tester une autre formation</EDButton>
+		 <EDButton variant="primary" size="lg" @click.prevent="() => {$router.push('/')}">Tester une autre formation</EDButton>
 	</div>
 </template>
