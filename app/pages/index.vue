@@ -186,7 +186,7 @@ if (isRandomMode) {
 			<ChoiceSelector
 				:key="classSelectorKey"
 				title="Classe"
-				:error-message="!isClassComplete ? 'À completer' : undefined"
+				:error-message="!isClassComplete ? 'À compléter' : undefined"
 				:options="[
 					getAllClasses(),
 					{ title: 'Type de bac', options: allBaccalaureatNames },
@@ -196,13 +196,13 @@ if (isRandomMode) {
 			<ChoiceSelector
 				:key="`specialities-${specialitySelectorKey}`"
 				title="Spécialités"
-				:error-message="!isSpecialityComplete ? 'À completer' : undefined"
+				:error-message="!isSpecialityComplete ? 'À compléter' : undefined"
 				:options="getSpecialityOptionsForSelectedType"
 				@submit="handleSpecialitySelections"
 			/>
 			<RankingSelector
 				title="Notes"
-				:error-message="!isNotesComplete ? 'À completer' : undefined"
+				:error-message="!isNotesComplete ? 'À compléter' : undefined"
 				:options="bacOptions.rankingChoices"
 				@submit="handleRankingSelection"
 			/>
