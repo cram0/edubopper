@@ -5,6 +5,6 @@
 	class="h-14 bg-beige border-b-2  border-beige-300 p-3"
 	@click="$router.push({ name: 'index' })"
 	>
-		<img class="cursor-pointer" src="@/assets/images/logo.svg">
+		<img class="cursor-pointer" src="@/assets/images/fun.svg">
 	</div>
 </template>
