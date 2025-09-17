@@ -14,6 +14,11 @@ export default defineNuxtConfig({
 			// weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
 		},
 	},
+	app: {
+		head: {
+			title: 'Edubopper',
+		},
+	},
 
 	modules: ['@nuxt/image', '@nuxt/eslint', '@nuxt/fonts'],
 })
