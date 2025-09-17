@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-	<div class="flex flex-col gap-4">
+	<div class="flex flex-col flex-1 gap-4">
 		<!-- Result header -->
 		<div class="flex flex-col items-center bg-beige-300 p-4 rounded-2xl gap-1">
 			<div class=" text-sm text-gris-600 gap-2 flex flex-row ">
@@ -17,7 +17,7 @@
 
 		<div class="rounded-3xl bg-white py-8 px-6 flex flex-col gap-6 items-center">
 			<!-- Logo -->
-			 <div class="size-28 bg-red-100 flex items-center justify-center">
+			 <div class="size-28 bg-yellow-100 rounded-full flex items-center justify-center">
 				<img src="@/assets/images/rating.png" alt="rating" class="object-fill size-16"/>
 			 </div>
 			<!-- Score -->
@@ -41,6 +41,8 @@
 		</div>
 
 		<!-- Button -->
-		 <EDButton variant="primary" size="lg" @click.prevent="() => {$router.push('/')}">Tester une autre formation</EDButton>
+		 <div class="flex-1 flex flex-col-reverse sm:flex-col">
+			<EDButton variant="primary" size="lg" class="mx-auto w-full sm:w-1/2" @click.prevent="() => {$router.push('/')}">Tester une autre formation</EDButton>
+		</div>
 	</div>
 </template>
