@@ -128,7 +128,7 @@ onUnmounted(() => {
 		</div>
 		<div
 			class="rounded-2xl p-5 backdrop-blur-lg"
-			style="background: linear-gradient(120deg, #ff7342 60%, #b176ff 100%)"
+			style="background: linear-gradient(110deg, #ff7342 45%, #b176ff 110%)"
 		>
 			<div class="flex flex-col sm:flex-row sm:justify-between gap-6">
 				<div class="text-white flex flex-col gap-2">
