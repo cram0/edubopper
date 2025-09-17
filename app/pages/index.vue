@@ -129,7 +129,9 @@ const handleGetHighschoolInformations = async (hs: Highschool) => {
 }
 
 // If random query parameter is set to true, prefill baccalaureat types with random values
-if (route.query.random === "true") {
+const isRandomMode = route.query.random === "true"
+
+if (isRandomMode) {
 	console.log("Random mode: Prefilling baccalaureat types.", route.query);
 	const response = await useFetch('/api/highschool/random', { method: 'get' });
 	const data = response.data.value?.data;
@@ -143,14 +145,25 @@ if (route.query.random === "true") {
 		}
 	} else {
 		console.warn("Failed to fetch random highschool data.");
-
 	}
 }
 </script>
 
 <template>
 	<div class="flex flex-col gap-4 flex-1">
-		<div class="flex flex-col gap-4">
+		<!-- High school selection prompt -->
+		<div v-if="!selectedHighschool && !isRandomMode" class="flex flex-col items-center justify-center flex-1 gap-6 p-8">
+			<div class="text-center">
+				<h1 class="text-2xl font-semibold text-gris-800 mb-2">Bienvenue sur EduMapper</h1>
+				<p class="text-gris-600">Pour commencer, sélectionnez votre lycée</p>
+			</div>
+			<div class="w-full max-w-md">
+				<HighschoolSelector v-model="selectedHighschool" @submit="handleGetHighschoolInformations" />
+			</div>
+		</div>
+
+		<!-- Main form (shown when highschool is selected OR in random mode) -->
+		<div v-else class="flex flex-col gap-4">
 			<HighschoolSelector v-model="selectedHighschool" @submit="handleGetHighschoolInformations" />
 			<ChoiceSelector
 				:key="classSelectorKey"
@@ -177,7 +190,7 @@ if (route.query.random === "true") {
 			/>
 		</div>
 
-		<div class="flex flex-col-reverse lg:flex-col items-center grow p-2 lg:p-4">
+		<div v-if="selectedHighschool || isRandomMode" class="flex flex-col-reverse lg:flex-col items-center grow p-2 lg:p-4">
 			<EDButton
 				variant="primary"
 				:disabled="
