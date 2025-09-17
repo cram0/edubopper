@@ -30,3 +30,7 @@ You can access the random generation at the / route if you add `?random=true` at
 - `http://localhost:3000?random=true`
 
 Since I implemented every cards' functionalities (classe, spécialité, and notes), prefilling is done on the highschool only, the cards are dynamically loading a random highschool, with a pre-deterministic random "seed" (modulo based on index), so depending on the highschool you get, you get specific Bac specialités.
+
+### Components
+
+The `ChoiceSelector.vue` loads a dynamic array of arrays, where each sub-array have an optional title, and an option array of string, which will populate the component with a unique selection, for example : {"Type de bac", ["General", "Technologique"]}. It then returns a Record with an index key and the string selected as a result, it returns as many records than there are sub-arrays.
