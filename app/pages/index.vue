@@ -3,6 +3,9 @@ import type { Highschool } from '@@/types/highschool.ts'
 
 const route = useRoute()
 
+// Loading state
+const isLoading = ref(false)
+
 const bacOptions = ref<{
 	classes: string[]
 	baccalaureatTypes: { label: string; specialities: string[] }[]
@@ -112,19 +115,25 @@ const handleGetHighschoolInformations = async (hs: Highschool) => {
 	const previousId = selectedHighschool.value?.id
 	selectedHighschool.value = hs
 
-	const informations = await $fetch(`/api/highschool/${hs.id}`, {
-		method: 'get',
-	})
+	isLoading.value = true
 
-	const data = informations.data
-	bacOptions.value.baccalaureatTypes = data.bacTypes
+	try {
+		const informations = await $fetch(`/api/highschool/${hs.id}`, {
+			method: 'get',
+		})
 
-	// If the highschool actually changed, reset class & speciality choices
-	if (previousId !== hs.id) {
-		classSelections.value = {}
-		specialitySelections.value = {}
-		selectedClass.value = null
-		selectedBacType.value = null
+		const data = informations.data
+		bacOptions.value.baccalaureatTypes = data.bacTypes
+
+		// If the highschool actually changed, reset class & speciality choices
+		if (previousId !== hs.id) {
+			classSelections.value = {}
+			specialitySelections.value = {}
+			selectedClass.value = null
+			selectedBacType.value = null
+		}
+	} finally {
+		isLoading.value = false
 	}
 }
 
@@ -133,24 +142,33 @@ const isRandomMode = route.query.random === "true"
 
 if (isRandomMode) {
 	console.log("Random mode: Prefilling baccalaureat types.", route.query);
-	const response = await useFetch('/api/highschool/random', { method: 'get' });
-	const data = response.data.value?.data;
-	if (data) {
-		console.log("Fetched random highschool data:", data);
-		const highschoolData = data as { highschool: Highschool; bacTypes: { label: string; specialities: string[] }[] };
-		selectedHighschool.value = highschoolData.highschool;
-		bacOptions.value = {
-			...bacOptions.value,
-			baccalaureatTypes: highschoolData.bacTypes,
+	isLoading.value = true
+
+	try {
+		const response = await useFetch('/api/highschool/random', { method: 'get' });
+		const data = response.data.value?.data;
+		if (data) {
+			console.log("Fetched random highschool data:", data);
+			const highschoolData = data as { highschool: Highschool; bacTypes: { label: string; specialities: string[] }[] };
+			selectedHighschool.value = highschoolData.highschool;
+			bacOptions.value = {
+				...bacOptions.value,
+				baccalaureatTypes: highschoolData.bacTypes,
+			}
+		} else {
+			console.warn("Failed to fetch random highschool data.");
 		}
-	} else {
-		console.warn("Failed to fetch random highschool data.");
+	} finally {
+		isLoading.value = false
 	}
 }
 </script>
 
 <template>
 	<div class="flex flex-col gap-4 flex-1">
+		<!-- Loading spinner -->
+		<SimpleSpinner v-if="isLoading" />
+
 		<!-- High school selection prompt -->
 		<div v-if="!selectedHighschool && !isRandomMode" class="flex flex-col items-center justify-center flex-1 gap-6 p-8">
 			<div class="text-center">
