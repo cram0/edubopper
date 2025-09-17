@@ -9,6 +9,7 @@ const props = defineProps<{
 	title: string
 	options: (string[] | SelectorOptionGroup)[]
 	errorMessage?: string
+	modelValue?: Record<number, string | undefined>
 }>()
 
 const isOpen = ref(false)
@@ -17,7 +18,14 @@ const emit = defineEmits<{
 	(e: 'submit', value: Record<number, string | undefined>): void
 }>()
 
-const selectedOptions = ref<Record<number, string | undefined>>({})
+const selectedOptions = ref<Record<number, string | undefined>>(props.modelValue ?? {})
+
+// Watch for changes in modelValue to update selectedOptions
+watch(() => props.modelValue, (newValue) => {
+	if (newValue) {
+		selectedOptions.value = { ...newValue }
+	}
+}, { immediate: true })
 
 const areAllOptionsSelected = computed(() => {
 	if (!props.options || props.options.length === 0) return false
@@ -59,7 +67,7 @@ const getGroupTitle = (
 					src="@/assets/icons/chevron-down.svg"
 					class="size-4 inline-block ml-2"
 					:class="{ 'rotate-180': isOpen }"
-				/>
+				>
 			</div>
 		</div>
 

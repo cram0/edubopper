@@ -24,7 +24,7 @@ const bacOptions = ref<{
 	],
 })
 
-const allBaccalaureatNames = computed(() =>
+const allBaccalaureatTypes = computed(() =>
 	bacOptions.value.baccalaureatTypes.map((type) => type.label)
 )
 
@@ -137,31 +137,52 @@ const handleGetHighschoolInformations = async (hs: Highschool) => {
 	}
 }
 
-// If random query parameter is set to true, prefill baccalaureat types with random values
-const isRandomMode = route.query.random === "true"
+const isRandomMode = computed(() => route.query.random === "true")
 
-if (isRandomMode) {
-	console.log("Random mode: Prefilling baccalaureat types.", route.query);
-	isLoading.value = true
+// handle random mode initialization on client side
+onMounted(async () => {
+	if (isRandomMode.value) {
+		console.log("Random mode: Prefilling baccalaureat types.", route.query);
+		isLoading.value = true
 
-	try {
-		const response = await useFetch('/api/highschool/random', { method: 'get' });
-		const data = response.data.value?.data;
-		if (data) {
-			console.log("Fetched random highschool data:", data);
-			const highschoolData = data as { highschool: Highschool; bacTypes: { label: string; specialities: string[] }[] };
-			selectedHighschool.value = highschoolData.highschool;
-			bacOptions.value = {
-				...bacOptions.value,
-				baccalaureatTypes: highschoolData.bacTypes,
+		try {
+			const response = await $fetch('/api/highschool/random', { method: 'get' });
+			const data = response?.data;
+			if (data) {
+				console.log("Fetched random highschool data:", data);
+				const highschoolData = data as { highschool: Highschool; bacTypes: { label: string; specialities: string[] }[] };
+				selectedHighschool.value = highschoolData.highschool;
+				bacOptions.value = {
+					...bacOptions.value,
+					baccalaureatTypes: highschoolData.bacTypes,
+				}
+
+				if (highschoolData.bacTypes.length > 0) {
+					// random class from available classes
+					const randomClass = bacOptions.value.classes[Math.floor(Math.random() * bacOptions.value.classes.length)]
+					// random bac type from the fetched data
+					const randomBacType = highschoolData.bacTypes[Math.floor(Math.random() * highschoolData.bacTypes.length)]
+
+					// prefill the class selections
+					if (randomClass && randomBacType) {
+						classSelections.value = {
+							0: randomClass,
+							1: randomBacType.label
+						}
+						selectedClass.value = randomClass
+						selectedBacType.value = randomBacType.label
+					}
+				}
+			} else {
+				console.warn("Failed to fetch random highschool data.");
 			}
-		} else {
-			console.warn("Failed to fetch random highschool data.");
+		} catch (error) {
+			console.error("Error fetching random data:", error);
+		} finally {
+			isLoading.value = false
 		}
-	} finally {
-		isLoading.value = false
 	}
-}
+})
 </script>
 
 <template>
@@ -187,9 +208,10 @@ if (isRandomMode) {
 				:key="classSelectorKey"
 				title="Classe"
 				:error-message="!isClassComplete ? 'À compléter' : undefined"
+				:model-value="classSelections"
 				:options="[
 					getAllClasses(),
-					{ title: 'Type de bac', options: allBaccalaureatNames },
+					{ title: 'Type de bac', options: allBaccalaureatTypes },
 				]"
 				@submit="handleClassSelections"
 			/>
