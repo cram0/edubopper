@@ -88,12 +88,12 @@ watch(() => props.progress, () => {
 				<linearGradient
 					id="progressGradient"
 					x1="0%"
-					y1="0%"
-					x2="100%"
-					y2="100%"
+					x2="30%"
+					y1="100%"
+					y2="10%"
 				>
-					<stop offset="0%" style="stop-color: #ff7342" />
-					<stop offset="100%" style="stop-color: #b176ff" />
+					<stop offset="10%" style="stop-color: #b176ff" />
+					<stop offset="70%" style="stop-color: #ff7342" />
 				</linearGradient>
 			</defs>
 		</svg>
