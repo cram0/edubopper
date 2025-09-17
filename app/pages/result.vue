@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// Progress value (0-100)
+const progressValue = ref(91)
+</script>
 
 <template>
 	<div class="flex flex-col flex-1 gap-4">
@@ -16,10 +19,10 @@
 		</div>
 
 		<div class="rounded-3xl bg-white py-8 px-6 flex flex-col gap-6 items-center">
-			<!-- Logo -->
-			 <div class="size-28 bg-yellow-100 rounded-full flex items-center justify-center">
-				<img src="@/assets/images/rating.png" alt="rating" class="object-fill size-16"/>
-			 </div>
+			<!-- Logo with circular progress -->
+			<CircularProgress :progress="progressValue">
+				<img src="@/assets/images/rating.png" alt="rating" class="object-fill size-16">
+			</CircularProgress>
 			<!-- Score -->
 			 <div class="flex flex-col items-center gap-1">
 				 <div class="py-1.5 px-4 text-xl flex flex-row gap-2 font-semibold">
