@@ -1,7 +1,7 @@
 import type { Highschool } from '@@/types/highschool'
 
 const baccalaureatTypes = [
-	{ label: 'General', specialities: ['S', 'ES', 'L'] },
+	{ label: 'Général', specialities: ['S', 'ES', 'L'] },
 	{ label: 'Technologique', specialities: ['STI2D', 'STMG'] },
 	{ label: 'Professionnel', specialities: ['Bac Pro'] },
 ]
