@@ -34,3 +34,8 @@ Since I implemented every cards' functionalities (classe, spécialité, and note
 ### Components
 
 The `ChoiceSelector.vue` loads a dynamic array of arrays, where each sub-array have an optional title, and an option array of string, which will populate the component with a unique selection, for example : {"Type de bac", ["General", "Technologique"]}. It then returns a Record with an index key and the string selected as a result, it returns as many records than there are sub-arrays.
+
+### TODOs
+
+- [ ] Fix font weights
+- [ ] Fix gradients
