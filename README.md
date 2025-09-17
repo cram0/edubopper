@@ -39,3 +39,4 @@ The `ChoiceSelector.vue` loads a dynamic array of arrays, where each sub-array h
 
 - [ ] /!\ Fix font weights
 - [x] Fix gradients
+- [ ] Pink radial gradient on highschool card ?
