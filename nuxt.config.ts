@@ -1,4 +1,4 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -10,8 +10,26 @@ export default defineNuxtConfig({
 		plugins: [tailwindcss()],
 	},
 	fonts: {
+		families: [
+			{
+				name: 'MD Sans',
+				weights: [
+					'100',
+					'200',
+					'300',
+					'400',
+					'500',
+					'600',
+					'700',
+					'800',
+					'900',
+				],
+				preload: true,
+				provider: 'google',
+			},
+		],
 		defaults: {
-			// weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+			weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
 		},
 	},
 	app: {

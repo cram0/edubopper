@@ -37,5 +37,5 @@ The `ChoiceSelector.vue` loads a dynamic array of arrays, where each sub-array h
 
 ### TODOs
 
-- [ ] Fix font weights
+- [ ] /!\ Fix font weights
 - [x] Fix gradients
