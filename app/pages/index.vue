@@ -154,8 +154,8 @@ if (isRandomMode) {
 		<!-- High school selection prompt -->
 		<div v-if="!selectedHighschool && !isRandomMode" class="flex flex-col items-center justify-center flex-1 gap-6 p-8">
 			<div class="text-center">
-				<h1 class="text-2xl font-semibold text-gris-800 mb-2">Bienvenue sur EduMapper</h1>
-				<p class="text-gris-600">Pour commencer, sélectionnez votre lycée</p>
+				<h1 class="text-2xl font-semibold text-gris-800 mb-2">Bienvenue sur Edubopper</h1>
+				<p class="text-gris-600">Pour commencer, modifiez votre lycée</p>
 			</div>
 			<div class="w-full max-w-md">
 				<HighschoolSelector v-model="selectedHighschool" @submit="handleGetHighschoolInformations" />
