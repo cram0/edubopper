@@ -78,7 +78,7 @@ const submitSelection = () => {
 <template>
 	<div class="bg-white border border-white p-5 rounded-2xl">
 		<div
-			class="flex flex-row justify-between items-center"
+			class="flex flex-row cursor-pointer justify-between items-center"
 			@click.prevent="isOpen = !isOpen"
 		>
 			<span class="text-base font-semibold">{{ props.title }}</span>
