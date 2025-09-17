@@ -1,75 +1,30 @@
-# Nuxt Minimal Starter
+# Edubopper
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Requirements
 
-## Setup
+Node 24.04 LTS
 
-Make sure to install dependencies:
+## Installation
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+npm i
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Run dev server
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Open `http://localhost:3000`
 
-Build the application for production:
+## Guide
 
-```bash
-# npm
-npm run build
+The website has 2 routes :
 
-# pnpm
-pnpm build
+- [/](http://localhost:3000)
+- [/result](http://localhost:3000/result)
 
-# yarn
-yarn build
+You can access the random generation at the / route if you add `?random=true` at the end of it, such as :
 
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- `http://localhost:3000?random=true`
