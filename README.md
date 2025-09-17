@@ -25,7 +25,7 @@ The website has 2 routes :
 - [/](http://localhost:3000)
 - [/result](http://localhost:3000/result)
 
-You can access the random generation at the / route if you add `?random=true` at the end of it, such as :
+You can access the random generation at the `/` route if you add `?random=true` at the end of it, such as :
 
 - `http://localhost:3000?random=true`
 
@@ -37,6 +37,10 @@ The `ChoiceSelector.vue` loads a dynamic array of arrays, where each sub-array h
 
 ### TODOs
 
-- [ ] /!\ Fix font weights
+- [x] /!\ Fix font weights
 - [x] Fix gradients
 - [ ] Pink radial gradient on highschool card ?
+
+### Questions
+
+Why [bopping](https://dictionary.cambridge.org/dictionary/english/bop) ?
