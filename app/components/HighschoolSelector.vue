@@ -19,8 +19,8 @@ const emit = defineEmits<{
 }>()
 
 const localSelectedName = ref<string | null>(null)
-const displayedHighschool = computed(() =>
-	props.modelValue?.name || localSelectedName.value || 'Etienne Dolet'
+const displayedHighschool = computed(
+	() => props.modelValue?.name || localSelectedName.value || 'Etienne Dolet'
 )
 
 // Debouncing
@@ -82,13 +82,13 @@ onUnmounted(() => {
 						src="@/assets/icons/search.svg"
 						class="absolute left-4 size-4 text-white"
 						aria-hidden="true"
-					>
+					/>
 					<input
 						v-model="searchQuery"
 						class="text-gris-900 w-full bg-beige p-4 pl-10 rounded-full"
 						placeholder="Rechercher un lycée"
 						autocomplete="off"
-					>
+					/>
 				</div>
 				<div
 					class="mt-3 bg-beige rounded-3xl max-h-[50vh] overflow-y-auto shadow-lg"
@@ -132,16 +132,16 @@ onUnmounted(() => {
 		>
 			<div class="flex flex-col sm:flex-row sm:justify-between gap-6">
 				<div class="text-white flex flex-col gap-2">
-					<span class="font-bold text-xl/tight">
+					<span class="font-bold text-xl">
 						{{ displayedHighschool }}
 					</span>
 					<div class="flex flex-row gap-2">
 						<div class="flex flex-row gap-1 items-center-safe">
-							<img src="@/assets/icons/pin-home.svg" class="size-3">
+							<img src="@/assets/icons/pin-home.svg" class="size-3" />
 							<span class="text-sm">Lille</span>
 						</div>
 						<div class="flex flex-row gap-1 items-center-safe">
-							<img src="@/assets/icons/building.svg" class="size-3">
+							<img src="@/assets/icons/building.svg" class="size-3" />
 							<span class="text-sm">Lycée Public</span>
 						</div>
 					</div>
