@@ -23,13 +23,13 @@ const stars = computed(() => {
 				<img
 					src="@/assets/icons/star-filled.svg"
 					alt="filled star"
-					class="size-3.5"
+					class="size-3"
 					:class="{ hidden: !star.filled }"
 				/>
 				<img
 					src="@/assets/icons/star-empty.svg"
 					alt="empty star"
-					class="size-3.5"
+					class="size-3"
 					:class="{ hidden: star.filled }"
 				/>
 			</div>
