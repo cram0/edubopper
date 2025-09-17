@@ -85,7 +85,7 @@ const submitSelection = () => {
 			<div class="flex flex-row items-center">
 				<span
 					v-if="props.errorMessage && !areAllFieldsSelected"
-					class="text-sm/relaxed text-gris"
+					class="text-sm/relaxed text-gris-600"
 				>
 					{{ props.errorMessage }}
 				</span>
@@ -161,7 +161,7 @@ const submitSelection = () => {
 		<!-- Show selected values when closed -->
 		<div
 			v-if="!isOpen && (averageGrade !== undefined || selectedOption)"
-			class="flex flex-col gap-1 text-gris"
+			class="flex flex-col gap-1 text-gris-600"
 		>
 			<div v-if="averageGrade !== undefined" class="mt-2">
 				<span>Moyenne: {{ averageGrade }}/20</span>

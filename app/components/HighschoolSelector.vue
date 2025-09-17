@@ -20,7 +20,7 @@ const emit = defineEmits<{
 
 const localSelectedName = ref<string | null>(null)
 const displayedHighschool = computed(() =>
-	props.modelValue?.name || localSelectedName.value || 'Error'
+	props.modelValue?.name || localSelectedName.value || 'Etienne Dolet'
 )
 
 // Debouncing
@@ -112,7 +112,7 @@ onUnmounted(() => {
 						>
 							Aucun résultat
 						</div>
-						<ul v-else class="divide-y divide-beige-border">
+						<ul v-else class="divide-y divide-beige-300">
 							<li v-for="hs in filtered" :key="hs.id">
 								<button
 									class="w-full text-left px-6 py-4 rounded-xl hover:cursor-pointer"
@@ -136,7 +136,7 @@ onUnmounted(() => {
 					</span>
 					<div class="flex flex-row gap-2">
 						<div class="flex flex-row gap-1 items-center-safe">
-							<img src="@/assets/icons/map-pin.svg" class="size-3">
+							<img src="@/assets/icons/pin-home.svg" class="size-3">
 							<span class="text-sm">Lille</span>
 						</div>
 						<div class="flex flex-row gap-1 items-center-safe">

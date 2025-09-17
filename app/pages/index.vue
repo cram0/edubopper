@@ -184,9 +184,7 @@ if (route.query.random === "true") {
 					!isClassComplete || !isSpecialityComplete || !isNotesComplete
 				"
 				@click="
-					() => {
-						console.log('Submitted!')
-					}
+					$router.push({ name: 'result' })
 				"
 			>
 				Confirmer

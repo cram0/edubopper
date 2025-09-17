@@ -52,7 +52,7 @@ const getGroupTitle = (
 		>
 			<span class="text-base font-semibold">{{ props.title }}</span>
 			<div class="flex flex-row items-center">
-				<span class="text-sm/relaxed text-gris">{{
+				<span class="text-sm/relaxed text-gris-600">{{
 					props.errorMessage ?? props.errorMessage
 				}}</span>
 				<img
@@ -120,7 +120,7 @@ const getGroupTitle = (
 		</div>
 
 		<!-- Show selected options -->
-		<div v-if="!isOpen" class="flex gap-1 text-gris">
+		<div v-if="!isOpen" class="flex gap-1 text-gris-600">
 			<div v-for="(option, index) in selectedOptions" :key="index" class="mt-2">
 				<span>{{ option }}</span>
 				<span v-if="index < Object.keys(selectedOptions).length - 1">,</span>
